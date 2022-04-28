@@ -1,0 +1,32 @@
+version: '3.7'
+volumes:
+  elastic:
+    driver: 'local'
+
+services:
+  elasticsearch:
+    build:
+      context: ./elasticsearch
+      dockerfile: ./Dockerfile
+    image: elasticsearch
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - TZ=Asia/Tokyo
+      - "ES_JAVA_OPTS=-Xms128m -Xms128m"
+      - "discovery.type=single-node"
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+      - ./wiki:/wiki
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.8.0
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    environment:
+      - "ELASTICSEARCH_URL=http://elasticsearch:9200"
+      - "I18N_LOCALE=ja-JP"
