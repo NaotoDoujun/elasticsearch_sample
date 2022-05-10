@@ -14,9 +14,14 @@ services:
       - 9200:9200
       - 9300:9300
     environment:
-      - TZ=Asia/Tokyo
+      - "TZ=Asia/Tokyo"
       - "ES_JAVA_OPTS=-Xms128m -Xms128m"
       - "discovery.type=single-node"
+      - "http.cors.allow-origin=*"
+      - "http.cors.enabled=true"
+      - "http.cors.allow-credentials=true"
+      - "http.cors.allow-methods=OPTIONS, HEAD, GET, POST, PUT, DELETE"
+      - "http.cors.allow-headers=X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization, Access-Control-Allow-Headers, Accept, x-elastic-client-meta"
     volumes:
       - elastic:/usr/share/elasticsearch/data
       - ./wiki:/wiki

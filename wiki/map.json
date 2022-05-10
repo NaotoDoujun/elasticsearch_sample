@@ -1,36 +1,38 @@
 {
   "mappings": {
     "properties": {
-        "id": {
-            "type": "integer"
-        },
-        "text": {
-            "type": "text",
-            "fielddata": true,
-            "store": true
-        },
-        "timestamp": {
-            "type": "date"
-        },
-        "title": {
-            "type": "keyword"
-        }
-    }
-  },
-    "settings": {
-      "analysis": {
-        "analyzer": {
-          "wikipedia_analyzer": {
-              "type": "custom",
-              "tokenizer": "kuromoji_user_dict"
-          }
-        },
-        "tokenizer": {
-            "kuromoji_user_dict": {
-                "type": "kuromoji_tokenizer",
-                "mode": "search"
-            }
-          }
+      "id": {
+        "type": "integer"
+      },
+      "text": {
+        "type": "text",
+        "fielddata": true,
+        "store": true
+      },
+      "timestamp": {
+        "type": "date"
+      },
+      "title": {
+        "type": "text",
+        "fielddata": true,
+        "store": true
       }
     }
+  },
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "wikipedia_analyzer": {
+          "type": "custom",
+          "tokenizer": "kuromoji_user_dict"
+        }
+      },
+      "tokenizer": {
+        "kuromoji_user_dict": {
+          "type": "kuromoji_tokenizer",
+          "mode": "search"
+        }
+      }
+    }
+  }
 }
