@@ -1,12 +1,10 @@
+import * as React from 'react';
+import { AppBar, Box, Toolbar, Typography, InputBase, IconButton, Drawer } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import { Search as SearchIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import { SearchBox } from '@elastic/react-search-ui';
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
+import { Settings } from '../Settings'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -49,6 +47,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function SearchAppBar() {
+  const [state, setState] = React.useState({
+    drawer: false,
+  });
+
+  const toggleDrawer = (open: boolean) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return;
+      }
+      setState({ ...state, drawer: open });
+    };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -76,8 +90,19 @@ function SearchAppBar() {
             )} />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          {/* <IconButton
+            color="inherit"
+            aria-label="settings"
+            onClick={toggleDrawer(true)}>
+            <SettingsIcon />
+          </IconButton> */}
         </Toolbar>
       </AppBar>
+      <Drawer anchor='right' open={state.drawer} onClose={toggleDrawer(false)}>
+        <Box sx={{ 'width': 250 }}>
+          <Settings />
+        </Box>
+      </Drawer>
     </Box>
   );
 }
