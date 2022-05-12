@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, Typography, InputBase, IconButton, Drawer } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, InputBase, Drawer } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import { Search as SearchIcon, Settings as SettingsIcon } from '@mui/icons-material';
+import { Search as SearchIcon } from '@mui/icons-material';
 import { SearchBox } from '@elastic/react-search-ui';
-import "@elastic/react-search-ui-views/lib/styles/styles.css";
 import { Settings } from '../Settings'
 
 const Search = styled('div')(({ theme }) => ({
@@ -90,12 +89,6 @@ function SearchAppBar() {
             )} />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          {/* <IconButton
-            color="inherit"
-            aria-label="settings"
-            onClick={toggleDrawer(true)}>
-            <SettingsIcon />
-          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Drawer anchor='right' open={state.drawer} onClose={toggleDrawer(false)}>

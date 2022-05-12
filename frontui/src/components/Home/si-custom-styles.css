@@ -1,0 +1,13 @@
+@media (prefers-color-scheme: dark) {
+
+  .sui-result__title,
+  .sui-result__title-link {
+    color: #fff;
+  }
+
+  .sui-result {
+    border: 1px solid #333;
+    background-color: #121212;
+    color: #fff;
+  }
+}
