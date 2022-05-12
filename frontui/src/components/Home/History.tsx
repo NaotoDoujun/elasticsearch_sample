@@ -8,14 +8,16 @@ function History() {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <Typography>History</Typography>
-      <List>
+      <Typography component="h2" variant="h6">History</Typography>
+      <List component="nav">
         {histories.map(history => (
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary={history} />
-            </ListItemButton>
-          </ListItem>
+          <>
+            <ListItem disablePadding divider>
+              <ListItemButton>
+                <ListItemText primary={history} />
+              </ListItemButton>
+            </ListItem>
+          </>
         ))}
       </List>
     </Paper>

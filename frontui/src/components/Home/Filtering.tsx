@@ -8,14 +8,16 @@ function Filtering() {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <Typography>Filter</Typography>
-      <List>
+      <Typography component="h2" variant="h6">Filter</Typography>
+      <List component="nav">
         {filters.map(filter => (
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary={filter} />
-            </ListItemButton>
-          </ListItem>
+          <>
+            <ListItem disablePadding divider>
+              <ListItemButton>
+                <ListItemText primary={filter} />
+              </ListItemButton>
+            </ListItem>
+          </>
         ))}
       </List>
     </Paper>

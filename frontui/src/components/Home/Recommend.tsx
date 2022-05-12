@@ -11,9 +11,9 @@ function Recommend() {
           flexDirection: 'column',
           height: 120
         }}>
-          <Typography>{recommend}</Typography>
+          <Typography component="h2" variant="h6">{recommend}</Typography>
           <Box sx={{ my: 1 }}>
-            {recommend}Contents
+            {recommend}'s Context
           </Box>
         </Paper>
       ))}
