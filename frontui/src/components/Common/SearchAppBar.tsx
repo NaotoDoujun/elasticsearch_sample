@@ -3,7 +3,8 @@ import { AppBar, Box, Toolbar, Typography, InputBase, Drawer } from '@mui/materi
 import { styled, alpha } from '@mui/material/styles';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { SearchBox } from '@elastic/react-search-ui';
-import { Settings } from '../Settings'
+import { UserHistoryContext } from '.';
+import { Settings } from '../Settings';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -49,6 +50,7 @@ function SearchAppBar() {
   const [state, setState] = React.useState({
     drawer: false,
   });
+  const { histories, setHistories } = React.useContext(UserHistoryContext);
 
   const toggleDrawer = (open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -75,18 +77,26 @@ function SearchAppBar() {
             App Title
           </Typography>
           <Search>
-            <SearchBox inputProps={{ placeholder: "Search…" }} view={({ onChange, value, onSubmit }) => (
-              <form onSubmit={onSubmit}>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ 'aria-label': 'search' }}
-                  value={value} onChange={(e) => onChange(e.currentTarget.value)}
-                />
-              </form>
-            )} />
+            <SearchBox inputProps={{ placeholder: "Search…" }}
+              view={({ onSubmit, value, onChange }) => (
+                <form onSubmit={(e) => {
+                  if (value) {
+                    let newHistories = [...histories, value];
+                    setHistories(newHistories);
+                    onSubmit(e);
+                  }
+                }}>
+                  <SearchIconWrapper>
+                    <SearchIcon />
+                  </SearchIconWrapper>
+                  <StyledInputBase
+                    placeholder="Search…"
+                    inputProps={{ 'aria-label': 'search' }}
+                    value={value}
+                    onChange={(e) => onChange(e.currentTarget.value)}
+                  />
+                </form>
+              )} />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
         </Toolbar>

@@ -1,6 +1,6 @@
 
-import { Paper, Typography, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-const filters = ['Filter1', 'Filter2'];
+import { Facet } from "@elastic/react-search-ui";
+import { Paper, Typography } from '@mui/material';
 function Filtering() {
   return (
     <Paper sx={{
@@ -9,17 +9,7 @@ function Filtering() {
       flexDirection: 'column'
     }}>
       <Typography component="h2" variant="h6">Filter</Typography>
-      <List component="nav">
-        {filters.map(filter => (
-          <>
-            <ListItem disablePadding divider>
-              <ListItemButton>
-                <ListItemText primary={filter} />
-              </ListItemButton>
-            </ListItem>
-          </>
-        ))}
-      </List>
+      <Facet field="title.keyword" label="Title" />
     </Paper>
   )
 }

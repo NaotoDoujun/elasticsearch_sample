@@ -1,9 +1,10 @@
-import { Results, ErrorBoundary, Paging } from '@elastic/react-search-ui';
+import { Results, ErrorBoundary, PagingInfo, Paging } from '@elastic/react-search-ui';
 
 function SearchResults() {
   return (
     <ErrorBoundary>
-      <Results titleField="title" shouldTrackClickThrough={true} />
+      <PagingInfo />
+      <Results titleField="title" />
       <Paging />
     </ErrorBoundary>
   )

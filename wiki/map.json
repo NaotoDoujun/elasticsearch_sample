@@ -6,16 +6,19 @@
       },
       "text": {
         "type": "text",
-        "fielddata": true,
-        "store": true
+        "analyzer": "wikipedia_analyzer"
       },
       "timestamp": {
         "type": "date"
       },
       "title": {
         "type": "text",
-        "fielddata": true,
-        "store": true
+        "analyzer": "wikipedia_analyzer",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
       }
     }
   },
@@ -23,12 +26,25 @@
     "analysis": {
       "analyzer": {
         "wikipedia_analyzer": {
+          "filter": [
+            "cjk_width",
+            "lowercase"
+          ],
+          "char_filter": [
+            "html_strip"
+          ],
           "type": "custom",
           "tokenizer": "kuromoji_user_dict"
         }
       },
       "tokenizer": {
         "kuromoji_user_dict": {
+          "token_chars": [
+            "letter",
+            "digit"
+          ],
+          "min_gram": "1",
+          "max_gram": "2",
           "type": "kuromoji_tokenizer",
           "mode": "search"
         }

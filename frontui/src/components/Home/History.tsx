@@ -1,23 +1,30 @@
-
-import { Paper, Typography, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-const histories = ['History1', 'History2'];
+import * as React from 'react';
+import { Paper, Typography, IconButton, List, ListItem, ListItemText } from '@mui/material';
+import { Delete as DeleteIcon } from '@mui/icons-material';
+import { UserHistoryContext } from '../Common';
 function History() {
+
+  const { histories, setHistories } = React.useContext(UserHistoryContext);
+  const reversed = [...histories].reverse();
+
+  const handleDeleteHistories = () => {
+    setHistories([]);
+  }
+
   return (
     <Paper sx={{
       p: 1, mt: 2, ml: 2,
       display: 'flex',
       flexDirection: 'column'
     }}>
-      <Typography component="h2" variant="h6">History</Typography>
+      <Typography component="h2" variant="h6">History
+        <IconButton onClick={handleDeleteHistories}><DeleteIcon /></IconButton>
+      </Typography>
       <List component="nav">
-        {histories.map(history => (
-          <>
-            <ListItem disablePadding divider>
-              <ListItemButton>
-                <ListItemText primary={history} />
-              </ListItemButton>
-            </ListItem>
-          </>
+        {reversed.map((history, index) => (
+          <ListItem key={index} disablePadding divider>
+            <ListItemText primary={history} />
+          </ListItem>
         ))}
       </List>
     </Paper>

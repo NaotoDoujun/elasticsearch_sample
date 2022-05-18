@@ -3,9 +3,8 @@ const recommends = ['Recommend1', 'Recommend2'];
 function Recommend() {
   return (
     <>
-      {recommends.map(recommend => (
-
-        <Paper sx={{
+      {recommends.map((recommend, index) => (
+        <Paper key={index} sx={{
           p: 1, mt: 2, mr: 2,
           display: 'flex',
           flexDirection: 'column',
