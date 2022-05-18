@@ -26,27 +26,18 @@
     "analysis": {
       "analyzer": {
         "wikipedia_analyzer": {
-          "filter": [
-            "cjk_width",
-            "lowercase"
-          ],
-          "char_filter": [
-            "html_strip"
-          ],
           "type": "custom",
-          "tokenizer": "kuromoji_user_dict"
-        }
-      },
-      "tokenizer": {
-        "kuromoji_user_dict": {
-          "token_chars": [
-            "letter",
-            "digit"
+          "char_filter": [
+            "icu_normalizer"
           ],
-          "min_gram": "1",
-          "max_gram": "2",
-          "type": "kuromoji_tokenizer",
-          "mode": "search"
+          "tokenizer": "kuromoji_tokenizer",
+          "filter": [
+            "kuromoji_baseform",
+            "kuromoji_part_of_speech",
+            "ja_stop",
+            "kuromoji_number",
+            "kuromoji_stemmer"
+          ]
         }
       }
     }
