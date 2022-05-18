@@ -5,9 +5,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { UserHistoryContext, SearchAppBar, Home } from './components';
-import { wiki_config } from './wikiConfig';
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 import "./components/Home/si-custom-styles.css";
+import { wiki_config } from './wikiConfig';
 
 const lightTheme = createTheme({
   palette: {
