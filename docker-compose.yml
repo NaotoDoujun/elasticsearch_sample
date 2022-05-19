@@ -7,8 +7,8 @@ volumes:
 
 services:
   neo4j:
-    container_name: neo4j
     image: neo4j
+    container_name: neo4j
     ports:
       - 7474:7474
       - 7687:7687
@@ -20,9 +20,6 @@ services:
       dockerfile: ./Dockerfile
     image: elasticsearch-kuromoji:7.8
     container_name: elasticsearch
-    ports:
-      - 9200:9200
-      - 9300:9300
     environment:
       - "TZ=Asia/Tokyo"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -32,6 +29,9 @@ services:
       - "http.cors.allow-credentials=true"
       - "http.cors.allow-methods=OPTIONS, HEAD, GET, POST, PUT, DELETE"
       - "http.cors.allow-headers=X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization, Access-Control-Allow-Headers, Accept, x-elastic-client-meta"
+    ports:
+      - 9200:9200
+      - 9300:9300
     volumes:
       - elastic:/usr/share/elasticsearch/data
       - ./wiki:/wiki
@@ -66,6 +66,8 @@ services:
       dockerfile: ./Dockerfile
     image: frontui
     container_name: frontui
+    environment:
+      - "TZ=Asia/Tokyo"
     ports:
       - 3000:80
     depends_on:
