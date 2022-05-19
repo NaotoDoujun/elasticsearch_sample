@@ -14,4 +14,7 @@ RUN pip install pillow scrapy scrapy_splash ScrapyElasticSearch
 # copy conf
 COPY supervisord.conf /etc/supervisor/conf.d/
 
+# copy sample_crawler
+COPY sample_crawler .
+
 CMD ["/usr/bin/supervisord"]

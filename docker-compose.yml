@@ -58,8 +58,6 @@ services:
     container_name: scrapy
     environment:
       - "TZ=Asia/Tokyo"
-    volumes:
-      - ./scrapy/sample_crawler:/app
     depends_on:
       - splash
   frontui:
