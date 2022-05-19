@@ -45,6 +45,23 @@ services:
     environment:
       - "ELASTICSEARCH_URL=http://elasticsearch:9200"
       - "I18N_LOCALE=ja-JP"
+  splash:
+    image: scrapinghub/splash
+    container_name: splash
+    depends_on:
+      - elasticsearch
+  scrapy:
+    build:
+      context: ./scrapy
+      dockerfile: ./Dockerfile
+    image: scrapy
+    container_name: scrapy
+    environment:
+      - "TZ=Asia/Tokyo"
+    volumes:
+      - ./scrapy/sample_crawler:/app
+    depends_on:
+      - splash
   frontui:
     build:
       context: ./frontui
