@@ -18,14 +18,14 @@ services:
     build:
       context: ./elasticsearch
       dockerfile: ./Dockerfile
-    image: elasticsearch:7.8
+    image: elasticsearch-kuromoji:7.8
     container_name: elasticsearch
     ports:
       - 9200:9200
       - 9300:9300
     environment:
       - "TZ=Asia/Tokyo"
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - "discovery.type=single-node"
       - "http.cors.allow-origin=*"
       - "http.cors.enabled=true"
