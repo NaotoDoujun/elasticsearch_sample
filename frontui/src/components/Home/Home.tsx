@@ -3,7 +3,6 @@ import { Box, Grid } from '@mui/material';
 import { SearchResults } from './Results';
 import { Filtering } from './Filtering';
 import { History } from './History';
-import { Recommend } from './Recommend';
 
 function Home() {
   return (
@@ -13,11 +12,8 @@ function Home() {
           <Filtering />
           <History />
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={10}>
           <SearchResults />
-        </Grid>
-        <Grid item xs={3}>
-          <Recommend />
         </Grid>
       </Grid>
     </Box>

@@ -1,12 +1,12 @@
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
 const connector = new ElasticsearchAPIConnector({
   host: "http://localhost:9200",
-  index: "wikipedia"
+  index: "jawiki"
 });
 
 export const wiki_config = {
   debug: true,
-  alwaysSearchOnInitialLoad: false,
+  alwaysSearchOnInitialLoad: true,
   apiConnector: connector,
   hasA11yNotifications: true,
   searchQuery: {

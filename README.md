@@ -1,43 +1,19 @@
-# elasticsearch
+# elasticsearch-sample
 elasticsearch and kibana
 
-# Usage
+## Usage
 ```bash
 docker-compose up -d --build
 ```
 
-## how to use powershells
-download latest wikipedia articles. i downloaded jawiki-latest-pages-articles.xml.bz2  
-https://dumps.wikimedia.org/jawiki/
+## Use wikipedia cirrussearch dump
+Download latest wikipedia cirrussearch dump file and place it in the 'scrapy/wiki' folder.  
+https://dumps.wikimedia.org/other/cirrussearch/  
+I used 'jawiki-20220516-cirrussearch-content.json.gz'  
 
-after unarchived bz2, run split_to_files.ps1.
-it'll take long time to done.
+## Create index with mapping and bulk import jawiki
+Run below commands in 'scrapy' container.
 ```bash
-pwsh ./split_to_files.ps1
-```
-
-after splited txt files, extract_header and footer.  
-run extract_header_footer.ps1
-```bash
-pwsh ./extract_header_footer.ps1
-```
-
-lets import wikipedia datas.  
-run import_data.ps1
-```bash
-pwsh ./import_data.ps1
-```
-
-after done, check out search query on kibana's Dev Tools like this.
-```
-GET /wikipedia/_search?pretty
-{
-  "query":{
-    "match":{
-      "text":"地理学"
-    }
-  },
-  "_source": ["id", "title", "text"],
-  "size": 100
-}
+curl -H "Content-Type: application/json" -XPUT 'http://elasticsearch:9200/jawiki?pretty' -d @/app/wiki/jawiki.json
+python3 /app/wiki/bulk_jawiki.py
 ```
