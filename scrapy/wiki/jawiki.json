@@ -1,6 +1,9 @@
 {
   "mappings": {
     "properties": {
+      "curid": {
+        "type": "long"
+      },
       "category": {
         "type": "text"
       },

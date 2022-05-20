@@ -12,8 +12,17 @@ https://dumps.wikimedia.org/other/cirrussearch/
 I used 'jawiki-20220516-cirrussearch-content.json.gz'  
 
 ## Create index with mapping and bulk import jawiki
-Run below commands in 'scrapy' container.
+Run below command in 'scrapy' container.
 ```bash
-curl -H "Content-Type: application/json" -XPUT 'http://elasticsearch:9200/jawiki?pretty' -d @/app/wiki/jawiki.json
 python3 /app/wiki/bulk_jawiki.py
+```
+If you wanna re-create index, enter y
+```bash
+root@ef85762ce1d9:/app# python3 /app/wiki/bulk_jawiki.py
+Re-create index[jawiki] before bulk import? [Y]es/[N]o? >> y
+ ****** bulk_import 1 [8.8 KB] started at 2022-05-21 03:36:37.542012 *****
+ ****** bulk_import 1 [8.8 KB]    done at 2022-05-21 03:36:58.324974 *****
+ ****** bulk_import 2 [8.8 KB] started at 2022-05-21 03:37:00.044334 *****
+ ****** bulk_import 2 [8.8 KB]    done at 2022-05-21 03:37:21.928143 *****
+ ****** bulk_import 3 [8.8 KB] started at 2022-05-21 03:37:23.277009 *****
 ```
