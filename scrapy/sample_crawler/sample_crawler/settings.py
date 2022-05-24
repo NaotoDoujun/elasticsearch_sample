@@ -103,3 +103,13 @@ SPIDER_MIDDLEWARES = {
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
+ITEM_PIPELINES = {
+    'sample_crawler.pipelines.SampleCrawlerPipeline': 500
+}
+
+ELASTICSEARCH_SERVER = 'elasticsearch'
+ELASTICSEARCH_INDEX = 'news'
+ELASTICSEARCH_INDEX_RECREATE = True
+ELASTICSEARCH_UNIQ_KEY = 'url'
+ELASTICSEARCH_MAPPING_PATH = '/app/sample_crawler/news.json'

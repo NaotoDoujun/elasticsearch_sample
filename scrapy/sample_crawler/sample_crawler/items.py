@@ -8,4 +8,6 @@ import scrapy
 
 class Headline(scrapy.Item):
     title = scrapy.Field()
-    body = scrapy.Field()
+    text = scrapy.Field()
+    url = scrapy.Field()
+    time = scrapy.Field()

@@ -16,14 +16,14 @@ class NewsSpider(scrapy.Spider):
         )
 
     def parse(self, response):
-        print(response.css('section.topics a::attr("href")').extract())
-
         for url in response.css('section.topics a::attr("href")').re(r'/pickup/\d+$'):
             abs_url = response.urljoin(url)
             yield scrapy.Request(abs_url, self.parse_topics)
 
     def parse_topics(self, response):
         item = Headline()
-        item['title'] = response.css('article a>p::text').extract_first()
-        item['body'] = response.css('p.highLightSearchTarget::text').extract_first()
+        item['title'] = response.css('article a>p::text').extract_first().replace('\u3000', '')
+        item['text'] = response.css('p.highLightSearchTarget::text').extract_first().replace('\u3000', '')
+        item['url'] = response.url
+        item['time'] = response.css('time::text').extract_first()
         yield item
