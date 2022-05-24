@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, Typography, InputBase, Drawer } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, InputBase, Drawer, IconButton } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import { Search as SearchIcon } from '@mui/icons-material';
+import { Search as SearchIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import { SearchBox } from '@elastic/react-search-ui';
-import { UserHistoryContext } from '.';
+import { AppSettingsContext } from '.';
 import { Settings } from '../Settings';
 
 const Search = styled('div')(({ theme }) => ({
@@ -47,10 +47,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function SearchAppBar() {
-  const [state, setState] = React.useState({
-    drawer: false,
-  });
-  const { histories, setHistories } = React.useContext(UserHistoryContext);
+  const { isOpenDrawer, setIsOpenDrawer, histories, setHistories } = React.useContext(AppSettingsContext);
 
   const toggleDrawer = (open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -61,7 +58,7 @@ function SearchAppBar() {
       ) {
         return;
       }
-      setState({ ...state, drawer: open });
+      setIsOpenDrawer(open);
     };
 
   return (
@@ -99,9 +96,10 @@ function SearchAppBar() {
               )} />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          <IconButton onClick={toggleDrawer(true)}><SettingsIcon /></IconButton>
         </Toolbar>
       </AppBar>
-      <Drawer anchor='right' open={state.drawer} onClose={toggleDrawer(false)}>
+      <Drawer anchor='right' open={isOpenDrawer} onClose={toggleDrawer(false)}>
         <Box sx={{ 'width': 250 }}>
           <Settings />
         </Box>

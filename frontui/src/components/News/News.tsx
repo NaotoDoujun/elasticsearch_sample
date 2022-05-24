@@ -1,7 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import { SearchProvider } from '@elastic/react-search-ui';
-import { SearchAppBar } from '../Common';
-import { NewsFiltering } from './NewsFiltering';
+import { SearchAppBar, Filtering, History } from '../Common';
 import { NewsResults } from './NewsResults';
 import { news_config } from '../../newsConfig';
 
@@ -12,7 +11,8 @@ function News() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={2}>
-            <NewsFiltering />
+            <Filtering />
+            <History />
           </Grid>
           <Grid item xs={10}>
             <NewsResults />

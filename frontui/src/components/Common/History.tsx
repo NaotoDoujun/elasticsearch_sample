@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Paper, Typography, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
-import { UserHistoryContext } from '../Common';
+import { AppSettingsContext } from '.';
 function History() {
 
-  const { histories, setHistories } = React.useContext(UserHistoryContext);
+  const { histories, setHistories } = React.useContext(AppSettingsContext);
   const reversed = [...histories].reverse();
 
   const handleDeleteHistories = () => {
