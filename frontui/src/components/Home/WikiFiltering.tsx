@@ -1,7 +1,7 @@
 
 import { Facet } from "@elastic/react-search-ui";
 import { Paper, Typography } from '@mui/material';
-function Filtering() {
+function WikiFiltering() {
   return (
     <Paper sx={{
       p: 1, mt: 2, ml: 2,
@@ -13,4 +13,4 @@ function Filtering() {
     </Paper>
   )
 }
-export { Filtering }
+export { WikiFiltering }

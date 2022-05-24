@@ -1,6 +1,6 @@
 import { Results, ErrorBoundary, PagingInfo, Paging } from '@elastic/react-search-ui';
 
-function SearchResults() {
+function WikiResults() {
   return (
     <ErrorBoundary>
       <PagingInfo />
@@ -10,4 +10,4 @@ function SearchResults() {
   )
 }
 
-export { SearchResults }
+export { WikiResults }
