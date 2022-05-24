@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Routes, Route } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -34,7 +35,10 @@ function App() {
         histories,
         setHistories
       }}>
-        {esIndex === 'news' ? <News /> : <Home />}
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path='/news' element={<News />} />
+        </Routes>
       </AppSettingsContext.Provider>
     </ThemeProvider>
   );

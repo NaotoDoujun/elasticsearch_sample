@@ -12,9 +12,11 @@ import {
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { AppSettingsContext } from '../Common';
 import { Close as CloseIcon } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
 
 function Settings() {
-  const { setIsOpenDrawer, esIndex, setEsIndex } = React.useContext(AppSettingsContext);
+  const navigate = useNavigate();
+  const { setIsOpenDrawer, esIndex, setEsIndex, setHistories } = React.useContext(AppSettingsContext);
 
   const toggleDrawer = (open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -29,7 +31,10 @@ function Settings() {
     };
 
   const handleChange = (event: SelectChangeEvent) => {
-    setEsIndex(event.target.value as string);
+    const index = event.target.value as string;
+    setEsIndex(index);
+    setHistories([]);
+    navigate(index === "jawiki" ? "/" : "/news");
   };
 
   return (
