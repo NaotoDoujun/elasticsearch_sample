@@ -26,3 +26,11 @@ Re-create index[jawiki] before bulk import? [Y]es/[N]o? >> y
  ****** bulk_import 2 [8.8 KB]    done at 2022-05-21 03:37:21.928143 *****
  ****** bulk_import 3 [8.8 KB] started at 2022-05-21 03:37:23.277009 *****
 ```
+
+## Scrapy Sample
+The sample crawls YahooJAPAN News every hour and imports them in the "news" index of Elasticsearch.  
+You can change the index on the configuration drawer screeen on frontui.  
+If you wanna crawl manually, do following command in 'scrapy' container.
+```bash
+scrapy crawl news
+```
