@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import json, gzip, datetime, sys, math
 from elasticsearch import Elasticsearch, helpers
-es = Elasticsearch("http://elasticsearch:9200",timeout=100)
+es = Elasticsearch("http://elasticsearch:9200", request_timeout=100)
 target_file = "/app/wiki/jawiki-20220516-cirrussearch-content.json.gz"
 target_index = "jawiki"
-target_mapping = "/app/wiki/jawiki.json"
+target_mapping = "/app/wiki/jawiki_mapping.json"
+target_setting = "/app/wiki/jawiki_setting.json"
 
 def progress(current, pro_size):
     return print('\r making bulk data {0}% {1}/{2}'.format(
@@ -72,9 +73,12 @@ def bulk_import_wiki(bulk_articles_limit=1000, import_limit=0):
 def make_index():
     if es.indices.exists(index=target_index):
         es.indices.delete(index=target_index)
-    with open(target_mapping) as f:
-        mapping = json.load(f)
-        es.indices.create(index=target_index, body=mapping)
+    
+    with open (target_setting) as fs:
+        setting = json.load(fs)
+        with open(target_mapping) as fm:
+            mapping = json.load(fm)
+            es.indices.create(index=target_index, mappings=mapping, settings=setting)
 
 def check_recreate_index():
     while True:

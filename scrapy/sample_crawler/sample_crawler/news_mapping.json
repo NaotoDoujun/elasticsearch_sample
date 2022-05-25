@@ -1,0 +1,23 @@
+{
+  "properties": {
+    "text": {
+      "type": "text",
+      "analyzer": "news_analyzer"
+    },
+    "time": {
+      "type": "text"
+    },
+    "url": {
+      "type": "keyword"
+    },
+    "title": {
+      "type": "text",
+      "analyzer": "news_analyzer",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

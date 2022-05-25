@@ -108,8 +108,8 @@ ITEM_PIPELINES = {
     'sample_crawler.pipelines.SampleCrawlerPipeline': 500
 }
 
-ELASTICSEARCH_SERVER = 'elasticsearch'
+ELASTICSEARCH_SERVER = 'http://elasticsearch:9200'
 ELASTICSEARCH_INDEX = 'news'
-ELASTICSEARCH_INDEX_RECREATE = True
 ELASTICSEARCH_UNIQ_KEY = 'url'
-ELASTICSEARCH_MAPPING_PATH = '/app/sample_crawler/news.json'
+ELASTICSEARCH_SETTING_PATH = '/app/sample_crawler/news_setting.json'
+ELASTICSEARCH_MAPPING_PATH = '/app/sample_crawler/news_mapping.json'

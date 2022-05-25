@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "curid": {
+      "type": "long"
+    },
+    "category": {
+      "type": "text"
+    },
+    "outgoing_link": {
+      "type": "text"
+    },
+    "text": {
+      "type": "text",
+      "analyzer": "wikipedia_analyzer"
+    },
+    "timestamp": {
+      "type": "date",
+      "format": "strict_date_optional_time||epoch_millis"
+    },
+    "title": {
+      "type": "text",
+      "analyzer": "wikipedia_analyzer",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

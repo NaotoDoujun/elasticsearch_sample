@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y busybox-static && apt-get clean all
 # install scrapy, scrapy_splash ,ScrapyElasticSearch and elasticsearch
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
-RUN pip install Pillow==9.1.1 Scrapy==2.6.1 scrapy-splash==0.8.0 elasticsearch==7.8.0
+RUN pip install Pillow==9.1.1 Scrapy==2.6.1 scrapy-splash==0.8.0 elasticsearch==8.2.0
 
 # crawl schedule every hour
 RUN mkdir -p /var/spool/cron/crontabs/ \

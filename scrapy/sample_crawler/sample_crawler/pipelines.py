@@ -16,7 +16,7 @@ class SampleCrawlerPipeline:
 
     def __init__(self, settings):
         self.settings = settings
-        self.es = Elasticsearch(self.settings['ELASTICSEARCH_SERVER'],timeout=100)
+        self.es = Elasticsearch(self.settings['ELASTICSEARCH_SERVER'], request_timeout=100)
         super(SampleCrawlerPipeline, self).__init__
 
     @classmethod
@@ -43,14 +43,12 @@ class SampleCrawlerPipeline:
         item_id = hashlib.sha1(unique_key).hexdigest()
         return item_id
 
-    def create_index(self):
-        if self.settings['ELASTICSEARCH_INDEX_RECREATE']:
-            if self.es.indices.exists(index=self.settings['ELASTICSEARCH_INDEX']):
-                self.es.indices.delete(index=self.settings['ELASTICSEARCH_INDEX'])
-        
-        with open(self.settings['ELASTICSEARCH_MAPPING_PATH']) as f:
-            mapping = json.load(f)
-            self.es.indices.create(index=self.settings['ELASTICSEARCH_INDEX'], body=mapping)
+    def create_index(self):        
+        with open(self.settings['ELASTICSEARCH_SETTING_PATH']) as fs:
+            setting = json.load(fs)
+            with open(self.settings['ELASTICSEARCH_MAPPING_PATH']) as fm:
+                mapping = json.load(fm)
+                self.es.indices.create(index=self.settings['ELASTICSEARCH_INDEX'], mappings=mapping, settings=setting)
 
     def index_item(self, item):
         if not self.es.indices.exists(index=self.settings['ELASTICSEARCH_INDEX']):
