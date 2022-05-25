@@ -4,14 +4,17 @@
       "type": "long"
     },
     "category": {
-      "type": "text"
+      "type": "text",
+      "analyzer": "wikipedia_analyzer",
+      "fielddata": true
     },
     "outgoing_link": {
       "type": "text"
     },
     "text": {
       "type": "text",
-      "analyzer": "wikipedia_analyzer"
+      "analyzer": "wikipedia_analyzer",
+      "fielddata": true
     },
     "timestamp": {
       "type": "date",
@@ -20,6 +23,7 @@
     "title": {
       "type": "text",
       "analyzer": "wikipedia_analyzer",
+      "fielddata": true,
       "fields": {
         "keyword": {
           "type": "keyword"
