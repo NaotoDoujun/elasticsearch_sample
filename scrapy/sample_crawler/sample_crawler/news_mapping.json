@@ -20,6 +20,9 @@
           "type": "keyword"
         }
       }
+    },
+    "suggest": {
+      "type": "completion"
     }
   }
 }

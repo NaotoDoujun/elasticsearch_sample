@@ -36,5 +36,26 @@ export const news_config = {
     facets: {
       "title.keyword": { type: "value", size: 10 },
     }
+  },
+  autocompleteQuery: {
+    results: {
+      resultsPerPage: 5,
+      result_fields: {
+        title: {
+          snippet: {
+            size: 100,
+            fallback: true
+          }
+        }
+      }
+    },
+    suggestions: {
+      types: {
+        documents: {
+          fields: ["suggest"]
+        }
+      },
+      size: 4
+    }
   }
 };

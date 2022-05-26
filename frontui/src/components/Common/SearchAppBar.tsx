@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, Typography, InputBase, Drawer, IconButton } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, Drawer, IconButton, Autocomplete, TextField } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import { Search as SearchIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import { SearchBox } from '@elastic/react-search-ui';
@@ -32,12 +32,12 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledTextField = styled(TextField)(({ theme }) => ({
   color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
+  '& .MuiOutlinedInput-root.MuiInputBase-sizeSmall .MuiAutocomplete-input': {
+    padding: 0,
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(3)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -61,6 +61,13 @@ function SearchAppBar() {
       setIsOpenDrawer(open);
     };
 
+  const genOptions = (count: number, autocompleteSuggestions: any) => {
+    if (count === 0) return []
+    return autocompleteSuggestions.documents.map((suggest: any) => {
+      return suggest.suggestion
+    })
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -74,9 +81,11 @@ function SearchAppBar() {
             App Title
           </Typography>
           <Search>
-            <SearchBox inputProps={{ placeholder: "Search…" }}
-              view={({ onSubmit, value, onChange }) => (
-                <form onSubmit={(e) => {
+            <SearchBox
+              autocompleteSuggestions={true}
+              debounceLength={0}
+              view={({ onSubmit, value, onChange, autocompletedSuggestionsCount, autocompletedSuggestions }) => (
+                <form onSubmit={e => {
                   if (value) {
                     let newHistories = [...histories, value];
                     setHistories(newHistories);
@@ -86,11 +95,19 @@ function SearchAppBar() {
                   <SearchIconWrapper>
                     <SearchIcon />
                   </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
+                  <Autocomplete
+                    freeSolo
+                    disableClearable
                     value={value}
-                    onChange={(e) => onChange(e.currentTarget.value)}
+                    options={genOptions(autocompletedSuggestionsCount, autocompletedSuggestions)}
+                    onChange={(e, newval, reason) => onChange(newval)}
+                    renderInput={(params) => <StyledTextField {...params} size="small" InputProps={{
+                      ...params.InputProps,
+                      type: 'search',
+                    }}
+                      placeholder="Search…"
+                      onChange={e => { onChange(e.target.value) }}
+                    />}
                   />
                 </form>
               )} />

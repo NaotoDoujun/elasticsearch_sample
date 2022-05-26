@@ -23,6 +23,7 @@ class NewsSpider(scrapy.Spider):
     def parse_topics(self, response):
         item = Headline()
         item['title'] = response.css('article a>p::text').extract_first().replace('\u3000', '')
+        item['suggest'] = response.css('article a>p::text').extract_first().replace('\u3000', '')
         item['text'] = response.css('p.highLightSearchTarget::text').extract_first().replace('\u3000', '')
         item['url'] = response.url
         item['time'] = response.css('time::text').extract_first()
