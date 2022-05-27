@@ -34,7 +34,7 @@ function Settings() {
     const index = event.target.value as string;
     setEsIndex(index);
     setHistories([]);
-    navigate(index === "jawiki" ? "/" : "/news");
+    navigate(index === "jawiki" ? "/" : "/news", { replace: true });
   };
 
   return (

@@ -41,8 +41,7 @@ def create_wiki_doc(curid, json_line):
         'text': json_line['text'],
         'category': json_line['category'],
         'outgoing_link': json_line['outgoing_link'],
-        'timestamp': json_line['timestamp'],
-        'suggest': json_line['title']
+        'timestamp': json_line['timestamp']
     }
 
 def open_cirrussearch_file(cirrussearch_file, index_name, bulk_articles_limit, import_limit):

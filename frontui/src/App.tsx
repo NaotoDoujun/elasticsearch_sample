@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -20,9 +20,10 @@ const darkTheme = createTheme({
 });
 
 function App() {
+  const location = useLocation();
   const isDark = useMediaQuery('(prefers-color-scheme: dark)');
   const [isOpenDrawer, setIsOpenDrawer] = React.useState<boolean>(false);
-  const [esIndex, setEsIndex] = React.useState<string>('jawiki');
+  const [esIndex, setEsIndex] = React.useState<string>(location.pathname === '/news' ? 'news' : 'jawiki');
   const [histories, setHistories] = React.useState<string[]>([]);
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>

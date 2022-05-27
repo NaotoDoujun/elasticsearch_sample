@@ -19,7 +19,11 @@
         "keyword": {
           "type": "keyword"
         }
-      }
+      },
+      "copy_to": "suggest"
+    },
+    "screenshot": {
+      "type": "binary"
     },
     "suggest": {
       "type": "completion"

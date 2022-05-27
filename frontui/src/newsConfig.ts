@@ -30,6 +30,7 @@ export const news_config = {
         }
       },
       url: {},
+      screenshot: {},
       time: {}
     },
     disjunctiveFacets: ["title.keyword"],

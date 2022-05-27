@@ -10,5 +10,5 @@ class Headline(scrapy.Item):
     title = scrapy.Field()
     text = scrapy.Field()
     url = scrapy.Field()
+    screenshot = scrapy.Field()
     time = scrapy.Field()
-    suggest = scrapy.Field()

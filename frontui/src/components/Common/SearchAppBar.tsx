@@ -86,11 +86,12 @@ function SearchAppBar() {
               debounceLength={0}
               view={({ onSubmit, value, onChange, autocompletedSuggestionsCount, autocompletedSuggestions }) => (
                 <form onSubmit={e => {
+                  e.preventDefault();
                   if (value) {
                     let newHistories = [...histories, value];
                     setHistories(newHistories);
-                    onSubmit(e);
                   }
+                  onSubmit(e);
                 }}>
                   <SearchIconWrapper>
                     <SearchIcon />
