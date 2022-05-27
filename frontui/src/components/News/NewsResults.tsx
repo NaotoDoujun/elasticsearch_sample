@@ -40,10 +40,13 @@ function NewsResults() {
         const text = getEscapedField(result, "text");
         return (
           <Grid container component="li" onClick={onClickLink} sx={{ p: 1, borderBottom: 1, borderColor: 'divider' }}>
-            <Grid item md={2}>
-              <img alt={title} width={150} src={`data:image/png;base64,${result.screenshot.raw}`} />
-            </Grid>
-            <Grid item md={10}>
+            <Grid item md={2} sx={{
+              height: 150,
+              backgroundImage: `url(data:image/png;base64,${result.screenshot.raw})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
+            }} />
+            <Grid item md={10} sx={{ px: 2 }}>
               <Typography variant="h6" dangerouslySetInnerHTML={{ __html: title }} />
               <Typography variant="subtitle2">{result.time.raw}</Typography>
               <Typography component="div" variant="body2" dangerouslySetInnerHTML={{ __html: text }} />
