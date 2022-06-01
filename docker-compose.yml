@@ -14,6 +14,17 @@ services:
       - 7687:7687
     volumes:
       - neo4j:/data
+  bertserving:
+    build:
+      context: ./bertserving
+      dockerfile: ./Dockerfile
+    image: bertserving
+    container_name: bertserving
+    ports:
+      - "5555:5555"
+      - "5556:5556"
+    volumes:
+      - ./bertserving/model:/model
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -65,6 +76,7 @@ services:
       - TZ=Asia/Tokyo
     volumes:
       - ./scrapy/wiki:/app/wiki
+      - ./scrapy/bert_test:/app/bert_test
     depends_on:
       - splash
   frontui:

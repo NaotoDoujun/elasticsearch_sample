@@ -34,3 +34,12 @@ If you wanna crawl manually, do following command in 'scrapy' container.
 ```bash
 scrapy crawl news
 ```
+
+## BERT Serving Sample
+Download model files from below link and place them in the bertserving/model   
+[BERT-wiki-ja](https://drive.google.com/drive/folders/1aR9kA8gRN9cT_tXO36E-y33tC-qb5-SH)  
+If you wanna try vector search, place "wiki-ja.model" in the scrapy/bert_test and run below commands in 'scrapy' container.
+```bash
+python3 bulk_bert_test.py
+python3 search_test.py
+```

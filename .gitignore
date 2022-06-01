@@ -3,3 +3,13 @@
 bin
 obj
 *.gz
+word2vec
+*.bz2
+bertserving/model/*.model
+bertserving/model/*vocab
+bertserving/model/*.txt
+bertserving/model/*.pbtxt
+bertserving/model/*.meta
+bertserving/model/*.index
+bertserving/model/*.data-00000-of-00001
+scrapy/bert_test/*.model
