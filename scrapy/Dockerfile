@@ -3,10 +3,10 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y busybox-static && apt-get clean all
 
-# install scrapy, scrapy_splash ,ScrapyElasticSearch and elasticsearch
+COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
-RUN pip install Pillow==9.1.1 Scrapy==2.6.1 scrapy-splash==0.8.0 elasticsearch==8.2.0 bert-serving-client==1.10.0 sentencepiece==0.1.96 pandas==1.4.2
+RUN pip install -r requirements.txt --no-cache-dir
 
 # crawl schedule every hour
 RUN mkdir -p /var/spool/cron/crontabs/ \

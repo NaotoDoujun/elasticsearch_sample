@@ -44,3 +44,13 @@ cd /app/bert_test
 python3 bulk_bert_test.py
 python3 search_test.py
 ```
+
+## Image Search Sample
+Download data from below link and place images/* dir in the scrapy/image_search/data  
+[The Oxford-IIIT Pet Dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz)  
+If you wanna try vector search, run below commands in 'scrapy' container.
+```bash
+cd /app/image_search
+python3 bulk_image.py
+python3 search_img.py
+```

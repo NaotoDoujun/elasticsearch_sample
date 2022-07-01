@@ -1,0 +1,10 @@
+###### Requirements with Version Specifiers ######`
+Pillow==9.1.1
+Scrapy==2.6.1
+scrapy-splash==0.8.0
+elasticsearch==8.2.0
+bert-serving-client==1.10.0
+sentencepiece==0.1.96
+pandas==1.4.2
+torch==1.12.0
+torchvision==0.13.0

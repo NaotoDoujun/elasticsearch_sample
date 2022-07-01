@@ -1,0 +1,21 @@
+{
+  "dynamic": "true",
+  "_source": {
+    "enabled": "true"
+  },
+  "properties": {
+    "text": {
+      "type": "text"
+    },
+    "image": {
+      "type": "binary"
+    },
+    "image_format": {
+      "type": "text"
+    },
+    "vector": {
+      "type": "dense_vector",
+      "dims": 512
+    }
+  }
+}

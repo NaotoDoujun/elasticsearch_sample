@@ -1,4 +1,3 @@
-from xml.etree.ElementInclude import include
 import pandas as pd
 from collections import OrderedDict
 from bert_serving.client import BertClient
