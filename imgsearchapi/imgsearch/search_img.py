@@ -3,7 +3,7 @@ from PIL import Image
 import torch
 import torch.nn as nn
 import torchvision.transforms as transforms
-from torchvision import models
+from torchvision.models import resnet34, ResNet34_Weights
 from collections import OrderedDict
 from elasticsearch import Elasticsearch
 import warnings
@@ -15,7 +15,7 @@ target_index = "img"
 
 def search_with_vector(filepath, index):
   img = Image.open(filepath)
-  model = models.resnet34(pretrained=True)
+  model = resnet34(weights=ResNet34_Weights.IMAGENET1K_V1)
   model.fc = nn.Identity()
   transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
   with torch.no_grad():
@@ -43,7 +43,7 @@ def search_with_vector(filepath, index):
       }) for _, row in pd.DataFrame(response['hits']['hits']).iterrows()])
 
 def main():
-  filepath = '/app/image_search/data/images/Abyssinian_3.jpg' #search image
+  filepath = '/app/imgsearch/data/images/Abyssinian_3.jpg' #search image
   print(search_with_vector(filepath, target_index))
 
 if __name__ == '__main__':

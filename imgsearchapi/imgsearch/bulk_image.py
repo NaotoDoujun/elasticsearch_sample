@@ -2,7 +2,7 @@
 import os, glob, json, datetime, sys, math
 import torch
 import torch.nn as nn
-from torchvision import models
+from torchvision.models import resnet34, ResNet34_Weights
 from elasticsearch import Elasticsearch, helpers
 from image_dataset import *
 import warnings
@@ -11,8 +11,8 @@ warnings.simplefilter('ignore', UserWarning)
 
 es = Elasticsearch("http://elasticsearch:9200", request_timeout=100)
 target_index = "img"
-target_mapping = "/app/image_search/img_mapping.json"
-images_path = "/app/image_search/data/images"
+target_mapping = "/app/imgsearch/img_mapping.json"
+images_path = "/app/imgsearch/data/images"
 image_format = "jpeg"
 
 def progress(current, pro_size):
@@ -46,7 +46,7 @@ def bulk_import_img(bulk_images_limit=1000):
   l = glob.glob(os.path.join(images_path, '*.jpg'))
   dataset = ImageDataSet(images_path, l, image_format)
   dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
-  model = models.resnet34(pretrained=True)
+  model = resnet34(weights=ResNet34_Weights.IMAGENET1K_V1)
   model.fc = nn.Identity()
   count, import_data, import_count = 1, [], 0
   for i, (data, filepath, img_base64) in enumerate(dataloader):

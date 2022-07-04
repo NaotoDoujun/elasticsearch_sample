@@ -77,9 +77,22 @@ services:
     volumes:
       - ./scrapy/wiki:/app/wiki
       - ./scrapy/bert_test:/app/bert_test
-      - ./scrapy/image_search:/app/image_search
     depends_on:
       - splash
+  imgsearchapi:
+    build:
+      context: ./imgsearchapi
+      dockerfile: ./Dockerfile
+    image: imgsearchapi
+    container_name: imgsearchapi
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./imgsearchapi:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - elasticsearch
   frontui:
     build:
       context: ./frontui

@@ -143,4 +143,4 @@ bertserving/model/*.meta
 bertserving/model/*.index
 bertserving/model/*.data-00000-of-00001
 scrapy/bert_test/*.model
-scrapy/image_search/data
+imgsearchapi/imgsearch/data
