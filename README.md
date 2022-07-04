@@ -46,11 +46,11 @@ python3 search_test.py
 ```
 
 ## Image Search Sample
-Download data from below link and place images/* dir in the scrapy/image_search/data  
+Download data from below link and place images/* dir in the imgsearchapi/imgsearch/data  
 [The Oxford-IIIT Pet Dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz)  
-If you wanna try vector search, run below commands in 'scrapy' container.
+If you wanna try vector search, run below commands in 'imgsearchapi' container.
 ```bash
-$ cd /app/image_search
+$ cd /app/imgsearch
 $ python3 bulk_image.py
 Re-create index[img] before bulk import? [Y]es/[N]o? >> y
  ****** bulk_import 1 [8.8 KB] started at 2022-07-01 22:12:47.811974 *****
