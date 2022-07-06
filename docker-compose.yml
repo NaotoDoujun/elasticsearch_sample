@@ -93,6 +93,16 @@ services:
       - 8000:8000
     depends_on:
       - elasticsearch
+  tubeindexer:
+    build:
+      context: ./tube_indexer
+      dockerfile: ./Dockerfile
+    image: tubeindexer
+    container_name: tubeindexer
+    environment:
+      - TZ=Asia/Tokyo
+    depends_on:
+      - elasticsearch
   frontui:
     build:
       context: ./frontui

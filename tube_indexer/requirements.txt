@@ -1,0 +1,14 @@
+###### Requirements without Version Specifiers ######`
+python-dotenv
+natsort
+
+###### Requirements with Version Specifiers ######`
+Pillow==9.1.1
+elasticsearch==8.2.0
+torch==1.12.0
+espnet_model_zoo==0.1.7
+pandas==1.4.2
+google-api-python-client==2.52.0
+yt-dlp==2022.6.29
+librosa==0.9.2
+pydub==0.25.1

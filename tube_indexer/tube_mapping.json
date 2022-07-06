@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "title": {
+      "type": "text",
+      "analyzer": "tube_analyzer",
+      "fielddata": true,
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "text": {
+      "type": "text",
+      "analyzer": "tube_analyzer",
+      "fielddata": true
+    },
+    "url": {
+      "type": "keyword"
+    },
+    "thumbnail": {
+      "type": "text"
+    },
+    "time": {
+      "type": "text"
+    }
+  }
+}

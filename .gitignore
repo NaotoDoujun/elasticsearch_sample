@@ -144,3 +144,5 @@ bertserving/model/*.index
 bertserving/model/*.data-00000-of-00001
 scrapy/bert_test/*.model
 imgsearchapi/imgsearch/data
+tube_indexer/videos
+tube_indexer/audios
