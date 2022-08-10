@@ -17,7 +17,7 @@ max_size = 3
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Api": "image search by cosineSimilarity [ResNet34]"}
 
 @app.post("/similarimgs/")
 async def search_similarimgs(file: UploadFile = File(...)):
@@ -58,4 +58,4 @@ async def search_similarimgs(file: UploadFile = File(...)):
   return results
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8100)

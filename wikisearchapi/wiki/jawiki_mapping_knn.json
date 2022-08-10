@@ -1,4 +1,8 @@
 {
+  "dynamic": "true",
+  "_source": {
+    "enabled": "true"
+  },
   "properties": {
     "curid": {
       "type": "long"
@@ -15,6 +19,22 @@
       "type": "text",
       "analyzer": "wikipedia_analyzer",
       "fielddata": true
+    },
+    "summarized_text": {
+      "type": "text",
+      "analyzer": "wikipedia_analyzer",
+      "fielddata": true
+    },
+    "text_vector": {
+      "type": "dense_vector",
+      "dims": 768,
+      "index": true,
+      "similarity": "l2_norm",
+      "index_options": {
+        "type": "hnsw",
+        "m": 15,
+        "ef_construction": 50
+      }
     },
     "timestamp": {
       "type": "date",

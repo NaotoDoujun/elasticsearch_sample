@@ -170,11 +170,18 @@ class TubeIndexer:
                   slice.export(f, format="wav")
                   self.logger.info("{} exported.".format(chunk_filepath))
                   count += 1 
+                  if count == config.MAX_AUDIOFILES:
+                    break
+              else:
+                continue
+              break
             else:
               chunk_filepath = "audios/{}/{}.wav".format(videoid, count)
               chunk.export(chunk_filepath, format="wav")
               self.logger.info("{} exported.".format(chunk_filepath))
               count += 1
+              if count == config.MAX_AUDIOFILES:
+                break
       except Exception as e:
         self.logger.error(e)
 

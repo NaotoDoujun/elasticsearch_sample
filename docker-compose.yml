@@ -1,30 +1,9 @@
 version: '3.7'
 volumes:
-  neo4j:
-    driver: 'local'
   elastic:
     driver: 'local'
 
 services:
-  neo4j:
-    image: neo4j
-    container_name: neo4j
-    ports:
-      - 7474:7474
-      - 7687:7687
-    volumes:
-      - neo4j:/data
-  bertserving:
-    build:
-      context: ./bertserving
-      dockerfile: ./Dockerfile
-    image: bertserving
-    container_name: bertserving
-    ports:
-      - "5555:5555"
-      - "5556:5556"
-    volumes:
-      - ./bertserving/model:/model
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -74,11 +53,32 @@ services:
     container_name: scrapy
     environment:
       - TZ=Asia/Tokyo
-    volumes:
-      - ./scrapy/wiki:/app/wiki
-      - ./scrapy/bert_test:/app/bert_test
     depends_on:
       - splash
+  tubeindexer:
+    build:
+      context: ./tube_indexer
+      dockerfile: ./Dockerfile
+    image: tubeindexer
+    container_name: tubeindexer
+    environment:
+      - TZ=Asia/Tokyo
+    depends_on:
+      - elasticsearch
+  wikisearchapi:
+    build:
+      context: ./wikisearchapi
+      dockerfile: ./Dockerfile
+    image: wikisearchapi
+    container_name: wikisearchapi
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./wikisearchapi:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - elasticsearch
   imgsearchapi:
     build:
       context: ./imgsearchapi
@@ -90,17 +90,7 @@ services:
     volumes:
       - ./imgsearchapi:/app
     ports:
-      - 8000:8000
-    depends_on:
-      - elasticsearch
-  tubeindexer:
-    build:
-      context: ./tube_indexer
-      dockerfile: ./Dockerfile
-    image: tubeindexer
-    container_name: tubeindexer
-    environment:
-      - TZ=Asia/Tokyo
+      - 8100:8100
     depends_on:
       - elasticsearch
   frontui:
