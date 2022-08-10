@@ -133,8 +133,5 @@ dmypy.json
 bin
 obj
 *.gz
-word2vec
 *.bz2
 imgsearchapi/imgsearch/data
-tube_indexer/videos
-tube_indexer/audios
