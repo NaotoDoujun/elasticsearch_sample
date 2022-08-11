@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 import config
 import tubeindexer
+from logging import Formatter, getLogger, StreamHandler, DEBUG, WARNING
 import warnings
 warnings.filterwarnings('ignore')
 
 def main():
+
+  logger = getLogger()
+  handler = StreamHandler()
+  handler.setLevel(DEBUG)
+  handler.setFormatter(Formatter('[%(name)s] %(message)s'))
+  logger.addHandler(handler)
+  logger.setLevel(WARNING)
+  logger.info('The root logger is created.')
 
   indexer = tubeindexer.TubeIndexer()
 
@@ -19,8 +28,8 @@ def main():
     videoid = result['id']['videoId']
     if not indexer.exists(config.ES_INDEX, videoid):
       indexer.download_video(videoid)
-      indexer.gen_audio(videoid)
-      text = indexer.do_speech2text(videoid)
+      indexer.recognizer.gen_audio(videoid)
+      text = indexer.recognizer.do_speech2text(videoid)
       doc = {
         'title': result['snippet']['title'],
         'text': text,

@@ -2,6 +2,8 @@ version: '3.7'
 volumes:
   elastic:
     driver: 'local'
+  tubeindexer:
+    driver: 'local'
 
 services:
   elasticsearch:
@@ -63,6 +65,8 @@ services:
     container_name: tubeindexer
     environment:
       - TZ=Asia/Tokyo
+    volumes:
+      - tubeindexer:/root/.cache
     depends_on:
       - elasticsearch
   wikisearchapi:
