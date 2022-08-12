@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AppSettingsContext, Home, News } from './components';
+import { AppSettingsContext, Home, News, Tube } from './components';
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 import "./components/Common/si-custom-styles.css";
 
@@ -19,11 +19,22 @@ const darkTheme = createTheme({
   },
 });
 
+const pathToIndex = (pathname: string) => {
+  switch (pathname) {
+    case "/news":
+      return "news";
+    case "/tube":
+      return "tube";
+    default:
+      return "jawiki";
+  }
+}
+
 function App() {
   const location = useLocation();
   const isDark = useMediaQuery('(prefers-color-scheme: dark)');
   const [isOpenDrawer, setIsOpenDrawer] = React.useState<boolean>(false);
-  const [esIndex, setEsIndex] = React.useState<string>(location.pathname === '/news' ? 'news' : 'jawiki');
+  const [esIndex, setEsIndex] = React.useState<string>(pathToIndex(location.pathname));
   const [histories, setHistories] = React.useState<string[]>([]);
   return (
     <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
@@ -39,6 +50,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path='/news' element={<News />} />
+          <Route path='/tube' element={<Tube />} />
         </Routes>
       </AppSettingsContext.Provider>
     </ThemeProvider>

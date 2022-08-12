@@ -30,15 +30,26 @@ function Settings() {
       setIsOpenDrawer(open);
     };
 
+  const navigateTo = (index: string) => {
+    switch (index) {
+      case "news":
+        return "/news";
+      case "tube":
+        return "/tube";
+      default:
+        return "/";
+    }
+  }
+
   const handleChange = (event: SelectChangeEvent) => {
     const index = event.target.value as string;
     setEsIndex(index);
     setHistories([]);
-    navigate(index === "jawiki" ? "/" : "/news", { replace: true });
+    navigate(navigateTo(index), { replace: true });
   };
 
   return (
-    <Card>
+    <Card sx={{ height: "100vh" }}>
       <CardHeader title="Settings" action={
         <IconButton aria-label="settings" onClick={toggleDrawer(false)}>
           <CloseIcon />
@@ -57,6 +68,7 @@ function Settings() {
           >
             <MenuItem value="jawiki">jawiki</MenuItem>
             <MenuItem value="news">news</MenuItem>
+            <MenuItem value="tube">tube</MenuItem>
           </Select>
         </FormControl>
       </CardContent>
