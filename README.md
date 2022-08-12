@@ -66,3 +66,7 @@ Re-create index[img] before bulk import? [Y]es/[N]o? >> y
 ```
 API for searching similar images by cosine similarity is here.  
 [image search api](http://localhost:8100/docs)  
+
+## YouTube Indexer Sample
+This sample crawls every hour by specific keywords and import results of texted speeches in the "tube" index of Elasticsearch.  
+Refer to ".env.sample", make ".env" and put your "api_key" in it.
