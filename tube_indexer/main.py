@@ -34,7 +34,7 @@ def main():
         'title': result['snippet']['title'],
         'text': text,
         'url': "https://youtu.be/{}".format(videoid),
-        'thumbnail': result['snippet']['thumbnails']['default']['url'],
+        'thumbnail': result['snippet']['thumbnails']['high']['url'],
         'time': result['snippet']['publishedAt']
       }
       import_data.append({'_index': config.ES_INDEX, '_id': videoid, '_source': doc})

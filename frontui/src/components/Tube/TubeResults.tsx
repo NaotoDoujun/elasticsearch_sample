@@ -50,7 +50,7 @@ function TubeResults() {
         return (
           <Grid container component="li" onClick={onClickLink} sx={{ p: 1, borderBottom: 1, borderColor: 'divider' }}>
             <Grid item md={2}>
-              <ButtonBase sx={{ width: 128, height: 90 }} href={result.url.raw} target="_blank" rel="noopener">
+              <ButtonBase sx={{ height: 150 }} href={result.url.raw} target="_blank" rel="noopener">
                 <Img alt="thumbnail" src={result.thumbnail.raw} />
               </ButtonBase>
             </Grid>
