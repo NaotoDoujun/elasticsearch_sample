@@ -1,0 +1,32 @@
+{
+  "dynamic": "true",
+  "_source": {
+    "enabled": "true"
+  },
+  "properties": {
+    "metadata_storage_name": {
+      "type": "text",
+      "analyzer": "vehiclereg_analyzer",
+      "fielddata": true,
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "translated_text": {
+      "type": "text",
+      "analyzer": "vehiclereg_analyzer",
+      "fielddata": true
+    },
+    "summarized_text": {
+      "type": "text",
+      "analyzer": "vehiclereg_analyzer",
+      "fielddata": true
+    },
+    "text_vector": {
+      "type": "dense_vector",
+      "dims": 768
+    }
+  }
+}

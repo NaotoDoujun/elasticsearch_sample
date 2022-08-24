@@ -3,9 +3,6 @@ import uvicorn
 import logging
 from fastapi import FastAPI
 from pydantic import BaseModel
-from pysummarization.nlpbase.auto_abstractor import AutoAbstractor
-from pysummarization.tokenizabledoc.mecab_tokenizer import MeCabTokenizer
-from pysummarization.abstractabledoc.top_n_rank_abstractor import TopNRankAbstractor
 import torch
 from transformers import BertJapaneseTokenizer, BertModel
 from elasticsearch import Elasticsearch
@@ -13,21 +10,12 @@ from elasticsearch import Elasticsearch
 app = FastAPI()
 logger = logging.getLogger('uvicorn')
 MODEL_NAME = 'cl-tohoku/bert-base-japanese-whole-word-masking'
-target_index = "jawiki"
-auto_abstractor = AutoAbstractor()
-auto_abstractor.tokenizable_doc = MeCabTokenizer()
-auto_abstractor.delimiter_list = ["。", "\n"]
-abstractable_doc = TopNRankAbstractor()
+target_index = "vehicleregs"
 tokenizer_jp = BertJapaneseTokenizer.from_pretrained(MODEL_NAME)
 model = BertModel.from_pretrained(MODEL_NAME)
 es = Elasticsearch("http://elasticsearch:9200", request_timeout=100)
 max_length = 256
 max_size = 3
-
-def summarize(text):
-    result_dict = auto_abstractor.summarize(text, abstractable_doc)
-    results = [x.replace('\n','') for x in result_dict["summarize_result"]]
-    return ''.join(results)
 
 def embedding(text):
     tokenized_inputs = tokenizer_jp(text, max_length=max_length, padding='max_length', truncation=True, return_tensors='pt')
@@ -44,12 +32,11 @@ class Item(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"Api": "jawiki search by cosineSimilarity [cl-tohoku/bert-base-japanese]"}
+    return {"Api": "vehicle regulations search by cosineSimilarity [cl-tohoku/bert-base-japanese]"}
 
 @app.post("/similardocs/")
 def search_similardocs(item: Item):
-    summarized_text = summarize(item.text)
-    query_vector = embedding(summarized_text)
+    query_vector = embedding(item.text)
     script_query = {
         "script_score": {
             "query": {"match_all": {}},
@@ -66,33 +53,15 @@ def search_similardocs(item: Item):
     )
     results = [
         {
-            'title': row['_source']['title'], 
-            'text': row['_source']['text'], 
+            'metadata_storage_name': row['_source']['metadata_storage_name'], 
+            'summarized_text': row['_source']['summarized_text'], 
             'score': row['_score'],
         }
         for row in response['hits']['hits']
     ]
 
-    # knn_query = {
-    #     "knn": {
-    #         "field": "text_vector",
-    #         "query_vector": query_vector,
-    #         "k": 10,
-    #         "num_candidates": 100
-    #     },
-    #     "_source": False
-    # }
-    # knn_url = 'http://elasticsearch:9200/{}/_knn_search'.format(target_index)
-    # headers = {
-    #     'Content-Type': 'application/json',
-    # }
-    # knn_req = urllib.request.Request(knn_url, json.dumps(knn_query).encode(), headers)
-    # with urllib.request.urlopen(knn_req) as knn_res:
-    #     body = knn_res.read().decode()
-    #     print(body)
-
     return results
     
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8200)

@@ -97,6 +97,20 @@ services:
       - 8100:8100
     depends_on:
       - elasticsearch
+  vehicleregapi:
+    build:
+      context: ./vehicleregapi
+      dockerfile: ./Dockerfile
+    image: vehicleregapi
+    container_name: vehicleregapi
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./vehicleregapi:/app
+    ports:
+      - 8200:8200
+    depends_on:
+      - elasticsearch
   frontui:
     build:
       context: ./frontui

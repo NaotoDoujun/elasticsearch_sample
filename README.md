@@ -70,3 +70,21 @@ API for searching similar images by cosine similarity is here.
 ## YouTube Indexer Sample
 This sample crawls every hour by specific keywords and import results of texted speeches in the "tube" index of Elasticsearch.  
 Refer to ".env.sample", make ".env" and put your "api_key" in it.
+
+## Create Index and bulk import for Vehicle Regulations Search
+Run below command in 'vehicleregapi' container.
+```bash
+python3 /app/vehicleregs/bulk_vehicleregs.py
+```
+If you wanna re-create index, enter y
+```bash
+$ python3 /app/vehicleregs/bulk_vehicleregs.py
+Some weights of the model checkpoint at cl-tohoku/bert-base-japanese-whole-word-masking were not used when initializing BertModel: ['cls.predictions.bias', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Re-create index[vehicleregs] before bulk import? [Y]es/[N]o? >> y
+ ****** bulk_import 1 [2.16 KB] started at 2022-08-24 11:36:31.147304 *****
+ ****** bulk_import 1 [2.16 KB]    done at 2022-08-24 11:36:33.974822 *****
+```
+API for searching similar sentences by cosine similarity is here.  
+[vehicle regulations api](http://localhost:8200/docs) 

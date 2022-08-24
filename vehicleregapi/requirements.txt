@@ -1,0 +1,8 @@
+###### Requirements with Version Specifiers ######`
+fastapi==0.78.0 
+uvicorn==0.17.6 
+elasticsearch==8.2.0
+torch==1.12.1
+transformers==4.21.1
+fugashi==1.1.0
+ipadic==1.0.0
